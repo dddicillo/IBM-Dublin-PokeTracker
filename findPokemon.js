@@ -47,9 +47,10 @@ Pokeio.init(username, password, location, provider, function(err) {
 
             for (var i = hb.cells.length - 1; i >= 0; i--) {
                 if (hb.cells[i].WildPokemon[0]) {
-                    var pokemon = Pokeio.pokemonlist[parseInt(hb.cells[i].WildPokemon[0].pokemon.PokemonId)-1]
-                    var location = hb.cells[i].WildPokemon[0].Latitude + ',' + hb.cells[i].WildPokemon[0].Longitude
-                    var ttl = hb.cells[i].WildPokemon[0].TimeTillHiddenMs;
+                  for (var j = hb.cells[i].WildPokemon.length - 1; j >= 0; j--) {
+                    var pokemon = Pokeio.pokemonlist[parseInt(hb.cells[i].WildPokemon[j].pokemon.PokemonId)-1]
+                    var location = hb.cells[i].WildPokemon[j].Latitude + ',' + hb.cells[i].WildPokemon[j].Longitude
+                    var ttl = hb.cells[i].WildPokemon[j].TimeTillHiddenMs;
 
                     console.log('[+] ' + pokemon.name + ' at  ' + location);
 
@@ -77,14 +78,14 @@ Pokeio.init(username, password, location, provider, function(err) {
                         attachments: [
                             {
                                 fallback: 'Go to these coordinates: ' + location,
-                                author_name: 'Disappears at ' + despawnTime(ttl),
+                                pretext: 'Disappears at ' + despawnTime(ttl),
                                 image_url: mapUrl
                             }
                         ]
                     }, function(err, response) {
                         if (err) console.err(err);
                     });
-
+                  }
                 }
             }
 
