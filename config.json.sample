@@ -1,0 +1,7 @@
+{
+  "user": "USER",
+  "pass": "PASSWORD",
+  "provider": "google",
+  "slack": "SLACK_URL",
+  "maps": "MAPS_API_KEY"
+}

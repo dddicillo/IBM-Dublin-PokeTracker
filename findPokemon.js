@@ -4,7 +4,7 @@ var Pokeio = require('./poke.io');
 var GoogleMapsAPI = require('googlemaps');
 var Slack = require('slack-node');
 var dateformat = require('dateformat');
-
+var config = require(__dirname + '/config.json');
 //Set environment variables or replace placeholder text
 var location = {
     type: 'name',
@@ -16,15 +16,15 @@ var location = {
     }
 };
 
-var webhookUrl = process.env.SLACK_URL;
+var webhookUrl = process.env.SLACK_URL || config.slack;
 
-var username = process.env.PGO_USERNAME || 'USER';
-var password = process.env.PGO_PASSWORD || 'PASS';
-var provider = process.env.PGO_PROVIDER || 'google';
+var username = process.env.PGO_USERNAME || config.user;
+var password = process.env.PGO_PASSWORD || config.pass;
+var provider = process.env.PGO_PROVIDER || config.provider;
 
 // Initialize Google Maps API
 var googleConfig = {
-    key: process.env.MAPS_API_KEY
+    key: process.env.MAPS_API_KEY || config.maps
 }
 var gmAPI = new GoogleMapsAPI(googleConfig);
 
